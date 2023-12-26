@@ -1,0 +1,57 @@
+﻿@model List<EntityLayer.Entities.Urun>
+@{
+    ViewBag.Title = "Index";
+}
+<a href="/AdminUrun/Create" class="btn btn-danger">Ekle</a>
+<br />
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Ad</th>
+        <th>Açıklama</th>
+        <th>Fiyat</th>
+        <th>Stok</th>
+        <th>Popüler</th>
+        <th>Onay</th>
+        <th>Resim</th>
+        <th>Kategori</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td> @item.Ad</td>
+    <td> @item.Aciklama</td>
+    <td> @item.Fiyat</td>
+    <td> @item.Stok</td>
+    <td>
+        @if (item.Popular == true)
+        {
+            <label class="btn btn-success">Evet</label>
+        }
+        else
+        {
+            <label class="btn btn-danger">Hayır</label>
+        }
+    </td>
+
+    <td>
+        @if (item.OnaylıMı == true)
+        {
+            <label class="btn btn-success">Evet</label>
+        }
+        else
+        {
+            <label class="btn btn-danger">Hayır</label>
+        }
+    </td>
+
+    <td><img src="~/Content/Image/@item.Image" width="80" height="80" />Resim</td>
+    <td>@item.Kategori.Ad</td>
+    <td>@Html.ActionLink("Sil","Delete", new {item.Id}, new {@class="btn btn-danger",onclick ="return confirm ('Silmek İstiyor Musunuz?')" })</td>
+    <td><a class="btn btn-primary" href="/AdminUrun/Update/@item.Id">Güncelle</a></td>
+</tr>
+    }
+</table>
+
